@@ -24,5 +24,5 @@ solve2 = sum . take 3 . reverse . sort . map sum
 main :: IO ()
 main = do
   input <- parse <$> readFile "input.txt"
-  (print . ("Star 1: "<> )) . show . solve1 $ input
-  (print . ("Star 2: "<> )) . show . solve2 $ input
+  (print . ("Star 1: " <>)) . show . solve1 $ input
+  (print . ("Star 2: " <>)) . show . solve2 $ input
