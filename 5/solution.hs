@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-
 import Data.List ( transpose )
 import Data.Char ( isDigit, isAlphaNum )
 import Data.Maybe ( mapMaybe )
@@ -10,13 +8,11 @@ type Stack a = [a]
 
 type Cargo a = Map Int (Stack a)
 
--- Probably stupid way of doing it but I got stuck on this for so long XD
 parseCargo :: String -> Cargo Char
 parseCargo = Map.fromList
   . zip [1..]
-  . map (reverse . mapMaybe (\case ' ' -> Nothing; c -> Just c))
+  . map (filter (/= ' '))
   . filter isStack
-  . map reverse
   . transpose
   . takeWhile (not . isNumbers)
   . lines
