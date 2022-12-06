@@ -1,14 +1,12 @@
 import Data.List ( nub )
 
-star1 :: String -> Int
-star1 (a : b : c : d : xs)
-  | nub [a, b, c, d] == [a, b, c, d] = 4
-star1 xs = 1 + star1 (tail xs)
+solve :: Int -> String -> Int
+solve prefixLen str = case splitAt prefixLen str of
+ (xs, ys) | nub xs == xs -> prefixLen
+          | otherwise    -> 1 + solve prefixLen (tail xs <> ys)
 
-star2 :: String -> Int
-star2 xs = case splitAt 14 xs of
- (xs, ys) | nub xs == xs -> 14
-          | otherwise    -> 1 + star2 (tail xs <> ys)
+star1 = solve 4
+star2 = solve 14
 
 main = do
   input <- readFile "input.txt"
